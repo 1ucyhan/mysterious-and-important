@@ -18,7 +18,7 @@ const initialState: KanbanState = {
 // from redux documentation: All you have to do is define a name for this slice, 
 // write an object that has some reducer functions in it, and it generates the 
 // corresponding action code automatically.
-export const KanbanSlice = createSlice({
+export const kanbanSlice = createSlice({
     name: 'kanban',
     initialState,
     reducers: {
@@ -46,3 +46,6 @@ export const KanbanSlice = createSlice({
     }
 })
 
+// generate the action creators
+export const { addTask, deleteTask, moveTask } = kanbanSlice.actions
+export default kanbanSlice.reducer
