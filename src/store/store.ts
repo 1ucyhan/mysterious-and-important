@@ -1,3 +1,5 @@
+// from redux documentation:
+// creates a Redux store, and also automatically configure the Redux DevTools extension 
 import { configureStore } from '@reduxjs/toolkit'
 import kanbanReducer from './kanbanSlice';
 
