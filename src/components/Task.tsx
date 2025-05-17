@@ -24,14 +24,16 @@ const Checkbox = styled.input.attrs({ type: 'checkbox' })`
 `
 
 interface TaskProps {
-    taskName: string;
+    id: string
+    name: string
+    columnName: string
 }
 
-const Task: React.FC<TaskProps> = ({taskName}) => {
+const Task: React.FC<TaskProps> = ({id, name, columnName}) => {
     return (
         <TaskWrapper>
             <Checkbox></Checkbox>
-            {taskName}
+            {name}
         </TaskWrapper>
     );
 };
