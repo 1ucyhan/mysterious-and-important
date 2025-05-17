@@ -74,6 +74,7 @@ const Column: React.FC<ColumnProps> = ({title}) => {
             <AddTaskButton onClick={handleAddTask}>
                 <img src="/plus.svg" alt="plus icon" />
                 Yet Another Task...
+                
             </AddTaskButton>
            
         </Background>

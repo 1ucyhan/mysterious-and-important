@@ -22,6 +22,12 @@ const Checkbox = styled.input.attrs({ type: 'checkbox' })`
     accent-color: #151515;
     border-radius: 50%;
 `
+const Delete = styled.img`
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    margin-left: auto;
+`
 
 interface TaskProps {
     id: string
@@ -34,6 +40,7 @@ const Task: React.FC<TaskProps> = ({id, name, columnName}) => {
         <TaskWrapper>
             <Checkbox></Checkbox>
             {name}
+            <Delete src="/delete.svg" alt="delete icon"></Delete>
         </TaskWrapper>
     );
 };
