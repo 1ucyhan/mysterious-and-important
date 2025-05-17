@@ -1,5 +1,6 @@
 import styled from 'styled-components'
-import plus from '/plus.svg'
+import Task from './Task';
+
 
 const Header = styled.h3`
     font-size: 36px;
@@ -9,7 +10,7 @@ const Header = styled.h3`
     color: #E4E4E4;
     background: #151515;
     display: inline-block;
-    width: fit;
+    width: fit-content;
 `
 const Background = styled.div`
     display: flex;
@@ -46,10 +47,12 @@ const Column: React.FC<ColumnProps> = ({title}) => {
     return (
         <Background>
             <Header>{title}</Header>
+            <Task taskName="penis"></Task>
             <AddTaskButton>
                 <img src="/plus.svg" alt="plus icon" />
-                Yet Another Task
+                Yet Another Task...
             </AddTaskButton>
+           
         </Background>
         
     );
