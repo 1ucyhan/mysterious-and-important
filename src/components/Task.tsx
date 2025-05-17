@@ -1,4 +1,7 @@
+import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
+import { deleteTask } from '../store/kanbanSlice'
+import { idText } from 'typescript'
 
 const TaskWrapper = styled.div`
     display: flex;
@@ -36,11 +39,17 @@ interface TaskProps {
 }
 
 const Task: React.FC<TaskProps> = ({id, name, columnName}) => {
+    const dispatch = useDispatch()
+    const handleDeleteTask = () => {
+        console.log("clicked on delete task")
+        dispatch(deleteTask({id: id}))
+    }
+    
     return (
         <TaskWrapper>
             <Checkbox></Checkbox>
             {name}
-            <Delete src="/delete.svg" alt="delete icon"></Delete>
+            <Delete onClick={handleDeleteTask} src="/delete.svg" alt="delete icon"></Delete>
         </TaskWrapper>
     );
 };
