@@ -1,8 +1,11 @@
 import styled from 'styled-components'
 import Task from './Task';
 import { useSelector, useDispatch } from 'react-redux'
-import { addTask, deleteTask, moveTask } from '../store/kanbanSlice'
+import { addTask, moveTask } from '../store/kanbanSlice'
 import { RootState } from '../store/store';
+import { useDrop } from 'react-dnd';
+import { useRef } from 'react';
+import { Dispatch, UnknownAction } from 'redux';
 
 // styles...
 const Header = styled.h3`
@@ -25,6 +28,11 @@ const Background = styled.div`
     height: 550px;
     border: 2px solid black;
     box-shadow: 20px 20px 0px 0px #000000;
+`
+const TaskWrapper = styled.div`
+    max-height: 420px;
+    overflow-y: scroll;
+
 `
 
 const AddTaskButton = styled.button`
@@ -53,28 +61,60 @@ interface ColumnProps {
 
 const Column: React.FC<ColumnProps> = ({title}) => {
     const dispatch = useDispatch()
+    const ref = useRef<HTMLDivElement>(null)
     const tasks = useSelector((state: RootState) => 
         state.kanban.tasks.filter(task => task.columnName == title)
     )
-    const handleAddTask = () => {
-        console.log("clicked on add task")
-        const newTask = prompt("What is your task's name?");
-        if (newTask) {
-            dispatch(addTask({name: newTask, columnName: title}))
+
+    const [{ isOver }, drop] = useDrop({
+        accept: 'task',
+        drop: (item: {id: string; columnName: string }) => {
+            if (item.columnName != title) {
+                dispatch(moveTask({id: item.id, columnName: title}))
+            }
+        },
+        collect: (monitor) => ({
+            isOver: !!monitor.isOver(),
+        })
+    });
+
+    drop(ref)
+
+    const addTaskAction = (dispatch: Dispatch<UnknownAction>) => (columnName: string) => (name: string) => {
+        if (name && columnName) {
+            dispatch(addTask({ name, columnName }));
         }
     }
+
+    // attempting curry ?
+    const handleAddTask = () => {
+        const newTask = prompt("wut is ur task")
+        if (newTask) {
+            addTaskAction(dispatch)(title)(newTask)
+        }
+    }
+
     return (
-        <Background>
+        <Background
+            ref = {ref}
+            style = {{
+                backgroundColor: isOver ? '#f0f0f0' : 'white',
+                boxShadow: isOver ? '25px 25px 0px 0px #000000' : '20px 20px 0px 0px #000000',
+                transition: '0.2s ease',
+            }}
+        >
             <Header>{title}</Header>
             {/* <Task taskName="penis"></Task> */}
             {/* mapping all the tasks... */}
-            {tasks.map((task) => (
-                <Task key={task.id} id={task.id} name={task.name} columnName={title}/>
-            ))}
+            <TaskWrapper>
+                {tasks.map((task) => (
+                    <Task key={task.id} id={task.id} name={task.name} columnName={title}/>
+                ))}
+            </TaskWrapper>
             <AddTaskButton onClick={handleAddTask}>
                 <img src="/plus.svg" alt="plus icon" />
                 Yet Another Task...
-                
+
             </AddTaskButton>
            
         </Background>
