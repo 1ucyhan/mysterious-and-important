@@ -6,6 +6,12 @@ import Column from './components/Column'
 const Board = styled.div`
   display: flex;
   justify-content: space-between;
+  gap: 60px;
+
+  @media (max-width: 900px) {
+   flex-direction: column;
+   gap: 0px;
+  }
 `
 
 function App() {

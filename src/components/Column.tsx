@@ -17,22 +17,40 @@ const Header = styled.h3`
     background: #151515;
     display: inline-block;
     width: fit-content;
+
+    @media (max-width: 800px) {
+        font-size: 18px
+    }
+
+    @media (min-width: 801px) and (max-width: 1024px) {
+        font-size: 24px
+    }
 `
 const Background = styled.div`
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
     margin-top: 40px;
     padding: 30px;
     background-color: white;
-    width: 350px;
+    flex-grow: 1;
+    // width: 350px;
     height: 550px;
     border: 2px solid black;
     box-shadow: 20px 20px 0px 0px #000000;
+
+    @media (max-width: 800px) {
+        flex-grow: 1;
+        height: 400px;
+    }
+
+    @media (min-width: 1100px) and (max-width: 1250px) {
+        width: 260px;
+    }
+
 `
 const TaskWrapper = styled.div`
     max-height: 420px;
     overflow-y: scroll;
-
 `
 
 const AddTaskButton = styled.button`
@@ -53,6 +71,14 @@ const AddTaskButton = styled.button`
 
     &:hover  {
         box-shadow: 5px 5px 0px 0px #000000;
+    }
+
+    @media (max-width: 800px) {
+        font-size: 14px
+    }
+
+    @media (min-width: 801px) and (max-width: 1024px) {
+        font-size: 16px
     }
 `
 interface ColumnProps {

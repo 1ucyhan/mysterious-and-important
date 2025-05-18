@@ -1,6 +1,5 @@
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components'  
-import { deleteTask } from '../store/kanbanSlice'
 import { curryDeleteTask } from '../actions'
 import { useDrag } from 'react-dnd'
 import { useRef } from 'react'
@@ -18,6 +17,14 @@ const TaskWrapper = styled.div<{ isDragging?: boolean }>`
     font-size: 18px;
     border: 1px black solid;
     cursor: grab;
+
+    @media (max-width: 800px) {
+        font-size: 14px
+    }
+
+    @media (min-width: 801px) and (max-width: 1024px) {
+        font-size: 16px
+    }
 `
 
 const Checkbox = styled.input.attrs({ type: 'checkbox' })`

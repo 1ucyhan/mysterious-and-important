@@ -5,6 +5,14 @@ const Title = styled.h1`
     font-size: 46px;
     font-weight: normal;
     margin: 0;
+
+    @media (max-width: 800px) {
+        font-size: 24px
+    }
+
+    @media (min-width: 801px) and (max-width: 1024px) {
+        font-size: 36px
+    }
 `;
 
 const SubHeading = styled.p`
@@ -13,6 +21,13 @@ const SubHeading = styled.p`
     font-weight: normal;
     margin: 0;
 
+    @media (max-width: 800px) {
+        font-size: 16px
+    }
+
+    @media (min-width: 801px) and (max-width: 1024px) {
+        font-size: 18px
+    }
 `;
 
 const Wrapper = styled.div`
@@ -23,6 +38,9 @@ const Wrapper = styled.div`
 const LineWrapper = styled(Wrapper)`
     flex-grow: 1;
     justify-content: space-between;
+    @media (max-width: 600px) {
+        display: none;
+    }
 `
 const BlackLine = styled.hr`
     border-top: 2px black solid;
