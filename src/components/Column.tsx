@@ -5,7 +5,7 @@ import { addTask, moveTask } from '../store/kanbanSlice'
 import { RootState } from '../store/store';
 import { useDrop } from 'react-dnd';
 import { useRef } from 'react';
-import { Dispatch, UnknownAction } from 'redux';
+import { curryAddTask, curryMoveTask } from '../actions'
 
 // styles...
 const Header = styled.h3`
@@ -56,21 +56,21 @@ const AddTaskButton = styled.button`
     }
 `
 interface ColumnProps {
-    title: string;
+    columnName: string;
 }
 
-const Column: React.FC<ColumnProps> = ({title}) => {
+const Column: React.FC<ColumnProps> = ({columnName}) => {
     const dispatch = useDispatch()
     const ref = useRef<HTMLDivElement>(null)
     const tasks = useSelector((state: RootState) => 
-        state.kanban.tasks.filter(task => task.columnName == title)
+        state.kanban.tasks.filter(task => task.columnName == columnName)
     )
 
     const [{ isOver }, drop] = useDrop({
         accept: 'task',
         drop: (item: {id: string; columnName: string }) => {
-            if (item.columnName != title) {
-                dispatch(moveTask({id: item.id, columnName: title}))
+            if (item.columnName != columnName) {
+                curryMoveTask(dispatch)(item.id)(columnName)
             }
         },
         collect: (monitor) => ({
@@ -80,17 +80,10 @@ const Column: React.FC<ColumnProps> = ({title}) => {
 
     drop(ref)
 
-    const addTaskAction = (dispatch: Dispatch<UnknownAction>) => (columnName: string) => (name: string) => {
-        if (name && columnName) {
-            dispatch(addTask({ name, columnName }));
-        }
-    }
-
-    // attempting curry ?
     const handleAddTask = () => {
         const newTask = prompt("wut is ur task")
         if (newTask) {
-            addTaskAction(dispatch)(title)(newTask)
+            curryAddTask(dispatch)(columnName)(newTask)
         }
     }
 
@@ -103,12 +96,12 @@ const Column: React.FC<ColumnProps> = ({title}) => {
                 transition: '0.2s ease',
             }}
         >
-            <Header>{title}</Header>
+            <Header>{columnName}</Header>
             {/* <Task taskName="penis"></Task> */}
             {/* mapping all the tasks... */}
             <TaskWrapper>
                 {tasks.map((task) => (
-                    <Task key={task.id} id={task.id} name={task.name} columnName={title}/>
+                    <Task key={task.id} id={task.id} name={task.name} columnName={columnName}/>
                 ))}
             </TaskWrapper>
             <AddTaskButton onClick={handleAddTask}>

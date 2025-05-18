@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components'  
 import { deleteTask } from '../store/kanbanSlice'
+import { curryDeleteTask } from '../actions'
 import { useDrag } from 'react-dnd'
 import { useRef } from 'react'
 
@@ -55,7 +56,7 @@ const Task: React.FC<TaskProps> = ({ id, name, columnName }) => {
     drag(ref)
     
     const handleDeleteTask = () => {
-        dispatch(deleteTask({ id: id }))
+        curryDeleteTask(dispatch)(id)
     }
     
     return (

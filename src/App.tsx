@@ -14,11 +14,10 @@ function App() {
       <GlobalStyle />
       <Header />
       <Board>
-        <Column title="Not Done (yet)"/>
-        <Column title="In Progress"/>
-        <Column title="Completed!"/>
+        <Column columnName="Not Done (yet)"/>
+        <Column columnName="In Progress"/>
+        <Column columnName="Completed!"/>
       </Board>
-
     </div>
   );
 }
