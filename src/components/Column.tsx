@@ -5,6 +5,7 @@ import { RootState } from '../store/store';
 import { useDrop } from 'react-dnd';
 import { useRef } from 'react';
 import { curryAddTask, curryMoveTask } from '../actions'
+import { Column as ColumnType } from '../types';
 
 const Header = styled.h3`
     font-size: 36px;
@@ -79,11 +80,8 @@ const AddTaskButton = styled.button`
         font-size: 16px
     }
 `
-interface ColumnProps {
-    columnName: string;
-}
 
-const Column: React.FC<ColumnProps> = ({columnName}) => {
+const Column: React.FC<ColumnType> = ({columnName}) => {
     const dispatch = useDispatch()
     const ref = useRef<HTMLDivElement>(null)
     const tasks = useSelector((state: RootState) => 

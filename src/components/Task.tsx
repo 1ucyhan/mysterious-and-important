@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { curryDeleteTask } from '../actions'
 import { useDrag } from 'react-dnd'
 import { useRef } from 'react'
+import { Task as TaskType } from '../types';
 
 const TaskWrapper = styled.div<{ isDragging?: boolean }>`
     display: flex;
@@ -42,13 +43,8 @@ const Delete = styled.img`
     margin-left: auto;
 `
 
-interface TaskProps {
-    id: string
-    name: string
-    columnName: string
-}
 
-const Task: React.FC<TaskProps> = ({ id, name, columnName }) => {
+const Task: React.FC<TaskType> = ({ id, name, columnName }) => {
     const dispatch = useDispatch()
     const ref = useRef<HTMLDivElement>(null)
 

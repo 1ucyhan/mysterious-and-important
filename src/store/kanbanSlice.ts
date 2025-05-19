@@ -1,15 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit'
-
-interface Task {
-    id: string
-    name: string
-    columnName: string
-}
-
-interface KanbanState {
-    tasks: Task[]
-}
+import { Task, KanbanState } from '../types';
 
 const initialState: KanbanState = {
     tasks: []
