@@ -12,8 +12,8 @@ const Header = styled.h3`
     margin: 0px;
     padding: 10px 5px;
     font-weight: normal;
-    color: #E4E4E4;
-    background: #151515;
+    color: var(--important-gray);
+    background: var(--mysterious-black);
     display: inline-block;
     width: fit-content;
 
@@ -32,8 +32,8 @@ const Background = styled.div`
     padding: 30px;
     background-color: white;
     flex-grow: 1;
-    height: 650px;
-    // width: 350px;
+    // using calc!
+    height: calc(100vh - 300px);
     border: 2px solid black;
     box-shadow: 20px 20px 0px 0px #000000;
 
@@ -45,11 +45,12 @@ const Background = styled.div`
     @media (min-width: 1100px) and (max-width: 1250px) {
         width: 260px;
     }
-
 `
 const TaskWrapper = styled.div`
-    max-height: 420px;
+    flex-grow: 1;
     overflow-y: scroll;
+    margin-top: 15px;
+    margin-bottom: 30px;
 `
 
 const AddTaskButton = styled.button`

@@ -1,6 +1,11 @@
 import { createGlobalStyle } from 'styled-components'
 
 export const GlobalStyle = createGlobalStyle`
+    // CSS variables?
+    :root {
+        --mysterious-black: #151515;
+        --important-gray: #E4E4E4;
+    }
 
     // import the pp font
     @font-face {
@@ -16,7 +21,7 @@ export const GlobalStyle = createGlobalStyle`
 
     body {
         font-family: ppFont;
-        background-color: #e4e4e4;
+        background-color: var(--important-gray);
         padding: 50px;
         text-align: start;
     }

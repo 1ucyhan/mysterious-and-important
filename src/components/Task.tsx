@@ -14,7 +14,7 @@ const TaskWrapper = styled.div<{ isDragging?: boolean }>`
     font-family: dmFont;
     bottom: 30px;
     padding: 10px 30px;
-    background-color: #E4E4E4;
+    background-color: var(--important-gray);
     font-size: 18px;
     border: 1px black solid;
     cursor: grab;
@@ -32,7 +32,7 @@ const Checkbox = styled.input.attrs({ type: 'checkbox' })`
     width: 16px;
     height: 16px;
     cursor: pointer;
-    accent-color: #151515;
+    accent-color: var(--mysterious-black);
     border-radius: 50%;
 `
 
