@@ -1,13 +1,11 @@
 import styled from 'styled-components'
 import Task from './Task';
 import { useSelector, useDispatch } from 'react-redux'
-import { addTask, moveTask } from '../store/kanbanSlice'
 import { RootState } from '../store/store';
 import { useDrop } from 'react-dnd';
 import { useRef } from 'react';
 import { curryAddTask, curryMoveTask } from '../actions'
 
-// styles...
 const Header = styled.h3`
     font-size: 36px;
     margin: 0px;
@@ -33,8 +31,8 @@ const Background = styled.div`
     padding: 30px;
     background-color: white;
     flex-grow: 1;
+    height: 650px;
     // width: 350px;
-    height: 550px;
     border: 2px solid black;
     box-shadow: 20px 20px 0px 0px #000000;
 
